@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlogDemo2.Core.Objects;
+﻿using BlogDemo2.Core.Objects;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cache;
-using NHibernate.Tool.hbm2ddl;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Web.Common;

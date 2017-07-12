@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BlogDemo2.Core.Objects;
 using NHibernate;
 using NHibernate.Linq;
@@ -110,7 +107,8 @@ namespace BlogDemo2.Core
         public IList<Post> PostsForSearch(string search, int pageNo, int pageSize)
         {
             var posts = _session.Query<Post>()
-                .Where(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))))
+                .Where(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) ||
+                                            p.Tags.Any(t => t.Name.Equals(search))))
                 .OrderByDescending(p => p.PostedOn)
                 .Skip(pageNo * pageSize)
                 .Take(pageSize)
@@ -130,7 +128,8 @@ namespace BlogDemo2.Core
         {
             return _session
                 .Query<Post>()
-                .Count(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))));
+                .Count(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) ||
+                                            p.Tags.Any(t => t.Name.Equals(search))));
         }
 
         public Post Post(int year, int month, string titleSlug)

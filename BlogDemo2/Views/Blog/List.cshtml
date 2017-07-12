@@ -1,11 +1,11 @@
 ﻿@model BlogDemo2.Models.ListViewModel
 
 <div id="content">
- 
+
     <h1>@ViewBag.Title</h1>
- 
+
     @Html.Partial("_Pager", Model)
- 
+
     @if (Model.Posts.Count > 0)
     {
         foreach (var post in Model.Posts)
@@ -17,7 +17,7 @@
     {
         <p>No posts found!</p>
     }
- 
+
     @Html.Partial("_Pager", Model)
- 
+
 </div>

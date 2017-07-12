@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using BlogDemo2.Core.Objects;
 
@@ -41,7 +37,7 @@ namespace BlogDemo2
 
         public static MvcHtmlString TagLink(this HtmlHelper helper, Tag tag)
         {
-            return helper.ActionLink(tag.Name, "Tag", "Blog", new { tag = tag.UrlSlug },
+            return helper.ActionLink(tag.Name, "Tag", "Blog", new {tag = tag.UrlSlug},
                 new
                 {
                     title = $"See all posts in {tag.Name}"

@@ -1,28 +1,28 @@
-﻿body 
-{ font-family: "lucida sans", arial, sans-serif; 
-  font-size: 9pt; 
-  background-color: #EEE7CD;
+﻿body {
+    background-color: #EEE7CD;
+    font-family: "lucida sans", arial, sans-serif;
+    font-size: 9pt;
 }
 
-#login-div form
-{ width: 500px; 
-  margin: 50px auto; }
-
-#login-div form legend
-{ font-size: 12pt; }
-
-#login-div form label
-{ display: inline-block; width: 100px; }
-
-span.field-validation-error
-{ color: red; }
-
-#login-div form input[type="submit"]
-{ margin-left: 200px; }
-
-.validation-summary-errors
-{ text-align: center; color: red; }
-
-div#tab-posts {
-  overflow: scroll;
+#login-div form {
+    margin: 50px auto;
+    width: 500px;
 }
+
+#login-div form legend { font-size: 12pt; }
+
+#login-div form label {
+    display: inline-block;
+    width: 100px;
+}
+
+span.field-validation-error { color: red; }
+
+#login-div form input[type="submit"] { margin-left: 200px; }
+
+.validation-summary-errors {
+    color: red;
+    text-align: center;
+}
+
+div#tab-posts { overflow: scroll; }

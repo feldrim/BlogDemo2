@@ -1,8 +1,8 @@
 ﻿@using (Html.BeginForm(
-                "Search",           // action
-                "Blog",             // controller
-                FormMethod.Get,     // method
-                new { id = "search-form" })) // html attributes
+    "Search", // action
+    "Blog", // controller
+    FormMethod.Get, // method
+    new {id = "search-form"})) // html attributes
 {
     <p>
         @Html.TextBox("s")

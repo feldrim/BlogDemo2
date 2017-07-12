@@ -1,10 +1,11 @@
-﻿@helper Tags(System.Web.Mvc.HtmlHelper htmlHelper,
-    IList<BlogDemo2.Core.Objects.Tag> tags)
+﻿@using BlogDemo2
+@using BlogDemo2.Core.Objects
+@helper Tags(System.Web.Mvc.HtmlHelper htmlHelper, IList<Tag> tags)
 {
-foreach (var tag in tags)
-{
+    foreach (var tag in tags)
+    {
         <div class="tags-div">
-            @BlogDemo2.ActionLinkExtensions.TagLink(htmlHelper, tag)
+            @htmlHelper.TagLink(tag)
         </div>
-}
+    }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using BlogDemo2.Core;
 using BlogDemo2.Core.Objects;
 
@@ -39,10 +36,10 @@ namespace BlogDemo2.Models
             }
         }
 
-        public IList<Post> Posts { get; private set; }
-        public int TotalPosts { get; private set; }
-        public Category Category { get; private set; }
-        public Tag Tag { get; private set; }
-        public string Search { get; private set; }
+        public IList<Post> Posts { get; }
+        public int TotalPosts { get; }
+        public Category Category { get; }
+        public Tag Tag { get; }
+        public string Search { get; }
     }
 }
