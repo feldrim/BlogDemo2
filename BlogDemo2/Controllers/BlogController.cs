@@ -1,6 +1,11 @@
-﻿using System.Web;
+﻿using System;
+using System.Configuration;
+using System.Net.Mail;
+using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using BlogDemo2.Core;
+using BlogDemo2.Core.Objects;
 using BlogDemo2.Models;
 
 namespace BlogDemo2.Controllers
@@ -71,6 +76,44 @@ namespace BlogDemo2.Controllers
         {
             var widgetViewModel = new WidgetViewModel(_blogRepository);
             return PartialView("_Sidebars", widgetViewModel);
+        }
+
+        public ActionResult BadAction()
+        {
+            throw new Exception("You forgot to implement this action!");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ViewResult Contact(Contact contact)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var client = new SmtpClient())
+                {
+                    var adminEmail = ConfigurationManager.AppSettings["AdminEmail"];
+                    var from = new MailAddress(adminEmail, "JustBlog Messenger");
+                    var to = new MailAddress(adminEmail, "JustBlog Admin");
+
+                    using (var message = new MailMessage(from, to))
+                    {
+                        message.Body = contact.Body;
+                        message.IsBodyHtml = true;
+                        message.BodyEncoding = Encoding.UTF8;
+
+                        message.Subject = contact.Subject;
+                        message.SubjectEncoding = Encoding.UTF8;
+
+                        message.ReplyTo = new MailAddress(contact.Email);
+
+                        client.Send(message);
+                    }
+                }
+
+                return View("Thanks");
+            }
+
+            return View();
         }
     }
 }

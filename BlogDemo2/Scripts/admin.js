@@ -258,7 +258,7 @@
                 var tagStr = "";
 
                 $.each(tags, function (i, t) {
-                    if (tagStr) tagStr += ", "
+                    if (tagStr) tagStr += ", ";
                     tagStr += t.Name;
                 });
 
@@ -617,7 +617,7 @@
                     gridName = "#tableTags";
                     pagerName = "#pagerTags";
                     break;
-                };
+                }
 
                 fn(gridName, pagerName);
                 ui.tab.isLoaded = true;

@@ -20,7 +20,7 @@
     <meta name="keywords" content="@(ViewBag.Keywords ?? ConfigurationManager.AppSettings["MetaKeywords"])" />
     <meta name="description" content="@(ViewBag.Description ?? ConfigurationManager.AppSettings["MetaDescription"])"/>
     <meta name="author" content="@ConfigurationManager.AppSettings["Author"]"/>
-
+    
     @Styles.Render("~/Content/themes/simple/css")
     @Scripts.Render("~/jquery", "~/jqueryval", "~/jqueryunobtrusiveval", "~/js")
 </head>
