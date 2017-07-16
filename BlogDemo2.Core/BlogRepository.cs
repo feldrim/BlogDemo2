@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BlogDemo2.Core.Objects;
+using Newtonsoft.Json;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -151,6 +152,317 @@ namespace BlogDemo2.Core
         public IList<Tag> Tags()
         {
             return _session.Query<Tag>().OrderBy(p => p.Name).ToList();
+        }
+
+        public IList<Post> Posts(int pageNo, int pageSize, string sortColumn,
+            bool sortByAscending)
+        {
+            IList<Post> posts;
+            IList<int> postIds;
+
+            switch (sortColumn)
+            {
+                case "Title":
+                    if (sortByAscending)
+                    {
+                        posts = _session.Query<Post>()
+                            .OrderBy(p => p.Title)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+                        postIds = posts.Select(p => p.Id).ToList();
+
+                        posts = _session.Query<Post>()
+                            .Where(p => postIds.Contains(p.Id))
+                            .OrderBy(p => p.Title)
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+                    }
+                    else
+                    {
+                        posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.Title)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+                        postIds = posts.Select(p => p.Id).ToList();
+
+                        posts = _session.Query<Post>()
+                            .Where(p => postIds.Contains(p.Id))
+                            .OrderByDescending(p => p.Title)
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+                    }
+                    break;
+                case "Published":
+                    if (sortByAscending)
+                    {
+                        posts = _session.Query<Post>()
+                            .OrderBy(p => p.Published)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+                        postIds = posts.Select(p => p.Id).ToList();
+
+                        posts = _session.Query<Post>()
+                            .Where(p => postIds.Contains(p.Id))
+                            .OrderBy(p => p.Published)
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+                    }
+                    else
+                    {
+                        posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.Published)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+                        postIds = posts.Select(p => p.Id).ToList();
+
+                        posts = _session.Query<Post>()
+                            .Where(p => postIds.Contains(p.Id))
+                            .OrderByDescending(p => p.Published)
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+                    }
+                    break;
+                case "PostedOn":
+                    if (sortByAscending)
+                    {
+                        posts = _session.Query<Post>()
+                            .OrderBy(p => p.PostedOn)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+                        postIds = posts.Select(p => p.Id).ToList();
+
+                        posts = _session.Query<Post>()
+                            .Where(p => postIds.Contains(p.Id))
+                            .OrderBy(p => p.PostedOn)
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+                    }
+                    else
+                    {
+                        posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.PostedOn)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+                        postIds = posts.Select(p => p.Id).ToList();
+
+                        posts = _session.Query<Post>()
+                            .Where(p => postIds.Contains(p.Id))
+                            .OrderByDescending(p => p.PostedOn)
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+                    }
+                    break;
+                case "Modified":
+                    if (sortByAscending)
+                    {
+                        posts = _session.Query<Post>()
+                            .OrderBy(p => p.Modified)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+                        postIds = posts.Select(p => p.Id).ToList();
+
+                        posts = _session.Query<Post>()
+                            .Where(p => postIds.Contains(p.Id))
+                            .OrderBy(p => p.Modified)
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+                    }
+                    else
+                    {
+                        posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.Modified)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+                        postIds = posts.Select(p => p.Id).ToList();
+
+                        posts = _session.Query<Post>()
+                            .Where(p => postIds.Contains(p.Id))
+                            .OrderByDescending(p => p.Modified)
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+                    }
+                    break;
+                case "Category":
+                    if (sortByAscending)
+                    {
+                        posts = _session.Query<Post>()
+                            .OrderBy(p => p.Category.Name)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+                        postIds = posts.Select(p => p.Id).ToList();
+
+                        posts = _session.Query<Post>()
+                            .Where(p => postIds.Contains(p.Id))
+                            .OrderBy(p => p.Category.Name)
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+                    }
+                    else
+                    {
+                        posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.Category.Name)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+                        postIds = posts.Select(p => p.Id).ToList();
+
+                        posts = _session.Query<Post>()
+                            .Where(p => postIds.Contains(p.Id))
+                            .OrderByDescending(p => p.Category.Name)
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+                    }
+                    break;
+                default:
+                    posts = _session.Query<Post>()
+                        .OrderByDescending(p => p.PostedOn)
+                        .Skip(pageNo * pageSize)
+                        .Take(pageSize)
+                        .Fetch(p => p.Category)
+                        .ToList();
+
+                    postIds = posts.Select(p => p.Id).ToList();
+
+                    posts = _session.Query<Post>()
+                        .Where(p => postIds.Contains(p.Id))
+                        .OrderByDescending(p => p.PostedOn)
+                        .FetchMany(p => p.Tags)
+                        .ToList();
+                    break;
+            }
+
+            return posts;
+        }
+
+        public int TotalPosts(bool checkIsPublished = true)
+        {
+            return _session.Query<Post>().Count(p => !checkIsPublished || p.Published);
+        }
+
+        public int AddPost(Post post)
+        {
+            using (var tran = _session.BeginTransaction())
+            {
+                _session.Save(post);
+                tran.Commit();
+                return post.Id;
+            }
+        }
+
+        public Category Category(int id)
+        {
+            return _session.Query<Category>().FirstOrDefault(t => t.Id == id);
+        }
+
+        public Tag Tag(int id)
+        {
+            return _session.Query<Tag>().FirstOrDefault(t => t.Id == id);
+        }
+
+        public void EditPost(Post post)
+        {
+            using (var tran = _session.BeginTransaction())
+            {
+                _session.SaveOrUpdate(post);
+                tran.Commit();
+            }
+        }
+
+        public void DeletePost(int id)
+        {
+            using (var tran = _session.BeginTransaction())
+            {
+                var post = _session.Get<Post>(id);
+                _session.Delete(post);
+                tran.Commit();
+            }
+        }
+
+        public int AddCategory(Category category)
+        {
+            using (var tran = _session.BeginTransaction())
+            {
+                _session.Save(category);
+                tran.Commit();
+                return category.Id;
+            }
+        }
+
+        public void EditCategory(Category category)
+        {
+            using (var tran = _session.BeginTransaction())
+            {
+                _session.SaveOrUpdate(category);
+                tran.Commit();
+            }
+        }
+
+        public void DeleteCategory(int id)
+        {
+            using (var tran = _session.BeginTransaction())
+            {
+                var category = _session.Get<Category>(id);
+                _session.Delete(category);
+                tran.Commit();
+            }
+        }
+
+        public int AddTag(Tag tag)
+        {
+            using (var tran = _session.BeginTransaction())
+            {
+                _session.Save(tag);
+                tran.Commit();
+                return tag.Id;
+            }
+        }
+
+        public void EditTag(Tag tag)
+        {
+            using (var tran = _session.BeginTransaction())
+            {
+                _session.SaveOrUpdate(tag);
+                tran.Commit();
+            }
+        }
+
+        public void DeleteTag(int id)
+        {
+            using (var tran = _session.BeginTransaction())
+            {
+                var tag = _session.Get<Tag>(id);
+                _session.Delete(tag);
+                tran.Commit();
+            }
         }
     }
 }

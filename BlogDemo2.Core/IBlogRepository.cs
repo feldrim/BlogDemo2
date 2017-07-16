@@ -7,6 +7,8 @@ namespace BlogDemo2.Core
     {
         IList<Post> Posts(int pageNo, int pageSize);
         int TotalPosts();
+        int TotalPosts(bool checkIsPublished = true);
+        int AddPost(Post post);
 
         IList<Post> PostsForCategory(string categorySlug, int pageNo, int pageSize);
         int TotalPostsForCategory(string categorySlug);
@@ -24,5 +26,27 @@ namespace BlogDemo2.Core
         IList<Category> Categories();
 
         IList<Tag> Tags();
+
+        IList<Post> Posts(int pageNo, int pageSize, string sortColumn, bool sortByAscending);
+
+        Category Category(int id);
+
+        Tag Tag(int id);
+
+        void EditPost(Post post);
+
+        void DeletePost(int id);
+
+        int AddCategory(Category category);
+
+        void EditCategory(Category category);
+
+        void DeleteCategory(int id);
+
+        int AddTag(Tag tag);
+
+        void EditTag(Tag tag);
+
+        void DeleteTag(int id);
     }
 }
