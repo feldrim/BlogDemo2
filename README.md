@@ -7,4 +7,9 @@
 - [ ] Use log4net or NLog instead of ELMAH.
 - [ ] Integrate a RBAC system with roles like admin, author etc.
 - [ ] Secure the application with help of [John Staveley's Security Essentials Project](https://github.com/johnstaveley/SecurityEssentials)
-- [ ] Optionaly, use an AOP framework like [Postsharp](https://www.postsharp.net/), [PureSharp](https://github.com/Virtuoze/Puresharp) etc. for logging etc. management
+- [ ] Create documentation with post-build event using [Wyam](https://github.com/Wyamio/Wyam) on Debug build.
+- [ ] Protect dll files using with post-build event using [ConfuserEx](https://github.com/yck1509/ConfuserEx) on Release build.
+
+
+## Optional
+- [ ] Use an AOP framework like [Postsharp](https://www.postsharp.net/), [PureSharp](https://github.com/Virtuoze/Puresharp) etc. for logging etc. management
